@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cvat-nginx
+  # name: cvat-nginx
+  name: cvat-traefik
   namespace: cvat
   labels:
     app: cvat-app
@@ -21,15 +22,20 @@ spec:
         tier: proxy
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      # - name: nginx
+      - name: traefik
+        # image: nginx
+        image: traefik:v2.4
         ports:
-        - containerPort: 80
+        # - containerPort: 80
+        - containerPort: 8080
         volumeMounts:
-        - mountPath: /etc/nginx
+        # - mountPath: /etc/nginx
+        - mountPath: /var/run
           readOnly: true
           name: cvat-nginx-conf
-        - mountPath: /var/log/nginx
+        # - mountPath: /var/log/nginx
+        - mountPath: /var/log/traefik
           name: log
       volumes:
       - name: cvat-nginx-conf
