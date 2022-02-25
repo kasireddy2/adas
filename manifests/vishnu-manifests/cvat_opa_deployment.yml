@@ -5,7 +5,6 @@ metadata:
   namespace: cvat
   labels:
     app: cvat-app
-    tier: 
 spec:
   replicas: 1
   strategy:
@@ -13,21 +12,15 @@ spec:
   selector:
     matchLabels:
       app: cvat-app
-      tier: 
   template:
     metadata:
       labels:
         app: cvat-app
-        tier: 
     spec:
       containers:
-        - name: cvat-frontend-app-container
-          image: vishnu00245/opa
-          imagePullPolicy: always
-          ports:
-          - containerPort: 8181
-          volumeMounts:
-          - mountPath: ./cvat/apps/iam/rules
-          readOnly: true
-          - mountPath: /rules     
-        
+      - name: cvat-opa
+        image: vishnu00245/opa
+        ports:
+        - containerPort: 8181
+        volumeMounts:
+        - mountPath: /rules
