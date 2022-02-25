@@ -23,7 +23,7 @@ spec:
       containers:
         - name: cvat-frontend
           image: vishnu00245/cvat_ui
-          imagePullPolicy: always
+          imagePullPolicy: Always
           env:
           - name: REACT_APP_API_PROTOCOL
             value: "http"
