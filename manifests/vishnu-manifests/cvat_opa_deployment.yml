@@ -5,6 +5,7 @@ metadata:
   namespace: cvat
   labels:
     app: cvat-app
+    tier: opa    
 spec:
   replicas: 1
   strategy:
@@ -12,10 +13,12 @@ spec:
   selector:
     matchLabels:
       app: cvat-app
+      tier: opa       
   template:
     metadata:
       labels:
         app: cvat-app
+        tier: opa         
     spec:
       containers:
       - name: cvat-opa
