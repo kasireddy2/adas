@@ -11,7 +11,7 @@ mountOptions:
   - debug
 volumeBindingMode: Immediate
 
-....
+...
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
