@@ -22,4 +22,4 @@ spec:
         image: vishnu00245/opa
         ports:
         - containerPort: 8181 
-        command: ["/bin/sh", "-c", "#(nop)","CMD[\"run\"]"]
+        
