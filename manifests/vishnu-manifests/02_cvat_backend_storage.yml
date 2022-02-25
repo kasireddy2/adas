@@ -6,8 +6,20 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: ""
+  storageClassName: standard
   resources:
     requests:
       storage: 20Gi
+      
+...
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: standard
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
 
