@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cvat-opa
+  namespace: cvat
+  labels:
+    app: cvat-app
+    tier: 
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cvat-app
+      tier: 
+  template:
+    metadata:
+      labels:
+        app: cvat-app
+        tier: 
+    spec:
+      containers:
+        - name: cvat-frontend-app-container
+          image: vishnu00245/opa
+          imagePullPolicy: always
+          ports:
+          - containerPort: 8181
+        volumeMounts:
+        # - mountPath: /etc/nginx
+        - mountPath: ./cvat/apps/iam/rules
+          readOnly: true
+        # - mountPath: /var/log/nginx
+        - mountPath: /rules     
+        
