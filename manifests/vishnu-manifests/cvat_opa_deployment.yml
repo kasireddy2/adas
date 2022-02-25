@@ -24,4 +24,6 @@ spec:
         - containerPort: 8181
         volumeMounts:
         - mountPath: /rules
-          name: opa        
+          name: opa   
+      - name: log
+        emptyDir: {}          
