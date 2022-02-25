@@ -26,10 +26,10 @@ spec:
           imagePullPolicy: always
           ports:
           - containerPort: 8181
-        volumeMounts:
+          volumeMounts:
         # - mountPath: /etc/nginx
-        - mountPath: ./cvat/apps/iam/rules
+          - mountPath: ./cvat/apps/iam/rules
           readOnly: true
         # - mountPath: /var/log/nginx
-        - mountPath: /rules     
+          - mountPath: /rules     
         
