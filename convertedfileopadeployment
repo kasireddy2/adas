@@ -1,0 +1,100 @@
+ #Generated using the tool https://8gwifi.org/kube1.jsp
+#Total Number of Services Found 1
+
+#Generating kubernetes YAML file for the Service cvat_opa.yml
+#This is Service Configuration Kube definition
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    generated.by: 8gwifi.org
+  name: service.name.4
+  namespace: default
+spec:
+  ports:
+  - name: nameme_01
+    port: 8181
+    protocol: tcp
+    targetPort: 8181
+  selector:
+    app: demo.72
+  type: NodePort
+
+
+#This is Deployment Configuration Kube definition
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: demo.72
+  name: deployment.name.65
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: demo.72
+  template:
+    metadata:
+      labels:
+        app: demo.72
+      namespace: default
+    spec:
+      containers:
+      - image: openpolicyagent/opa:0.34.2-rootless
+        imagePullPolicy: IfNotPresent
+        name: cvat_opa
+        ports:
+        - containerPort: 8181
+          name: portname.0
+          protocol: tcp
+        volumeMounts:
+        - mountPath: /rules
+          name: pvo.0
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 0
+      volumes:
+      - name: pvo.0
+        persistentVolumeClaim:
+          claimName: claimname.0
+
+#This is PersistentVolume Kube Object with Name
+#pvo.0.yml
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    generated.by: 8gwifi.org
+  name: pvo.0
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: ./cvat/apps/iam/rules
+    type: Directory
+  persistentVolumeReclaimPolicy: Retain
+
+#This is PersistentVolumeClaim Kube Object with Name
+#claimname.0.yml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    generated.by: 8gwifi.org
+  name: claimname.0
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: pvo.0
